@@ -1,23 +1,22 @@
 /**
- * @description      :
- * @author           : DHANUSH
- * @group            :
- * @created          : 22/10/2025 - 10:06:58
- *
- * MODIFICATION LOG
- * - Version         : 1.0.0
- * - Date            : 22/10/2025
- * - Author          : DHANUSH
- * - Modification    :
- **/
-import "./App.css";
+    * @description      : 
+    * @author           : DHANUSH
+    * @group            : 
+    * @created          : 22/10/2025 - 10:59:54
+    * 
+    * MODIFICATION LOG
+    * - Version         : 1.0.0
+    * - Date            : 22/10/2025
+    * - Author          : DHANUSH
+    * - Modification    : 
+**/
 import React, { useState } from "react";
 
-function App() {
+export default function XSpellCheck() {
   const [text, setText] = useState("");
   const [suggestion, setSuggestion] = useState("");
 
-  const customDicionary = {
+  const customDictionary = {
     teh: "the",
     wrok: "work",
     fot: "for",
@@ -34,37 +33,34 @@ function App() {
     }
 
     const words = inputText.split(/\s+/);
-    let found = false;
+
+    let foundSuggestion = "";
 
     for (let word of words) {
-      const lowerWord = word.toLowerCase();
-      if (customDicionary[lowerWord]) {
-        setSuggestion(`Did you mean: ${customDicionary[lowerWord]}`);
-        found = true;
-        break;
+      const cleanedWord = word.replace(/[^a-zA-Z]/g, "").toLowerCase();
+
+      if (customDictionary.hasOwnProperty(cleanedWord)) {
+        foundSuggestion = `Did you mean: ${customDictionary[cleanedWord]}?`;
+        break; 
       }
     }
 
-    if (!found) {
-      setSuggestion("");
-    }
+    setSuggestion(foundSuggestion);
   };
-  return (
-    <div className="App">
-      <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <h1>Spell Check and Auto-Correction</h1>
-        <textarea
-          placeholder="Type something here..."
-          rows="5"
-          cols="50"
-          value={text}
-          onChange={handleChange}
-        ></textarea>
 
-        {suggestion && <p style={{ marginTop: "10px" }}>{suggestion}</p>}
-      </div>
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>XSpellCheck</h2>
+
+      <textarea
+        rows="5"
+        cols="50"
+        placeholder="Type something here..."
+        value={text}
+        onChange={handleChange}
+      ></textarea>
+
+      {suggestion && <p style={{ marginTop: "10px" }}>{suggestion}</p>}
     </div>
   );
 }
-
-export default App;

@@ -1,0 +1,12 @@
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  width: 60%;
+}
+
+p {
+  font-weight: bold;
+  color: #333;
+}
